@@ -83,6 +83,10 @@ namespace Firu_Core.Models
                     .HasColumnName("tamano")
                     .HasDefaultValueSql("((1))");
 
+                entity.Property(e => e.Especie)
+                    .HasColumnName("especie")
+                    .HasDefaultValueSql("((1))");
+
                 entity.HasOne(d => d.Responsable)
                     .WithMany(p => p.Mascota)
                     .HasForeignKey(d => d.ResponsableId)

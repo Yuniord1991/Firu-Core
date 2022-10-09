@@ -16,6 +16,7 @@ namespace Firu_Core.Models
         public decimal? Peso { get; set; }
         public bool? Castrado { get; set; }
         public int Tamano { get; set; }
+        public string Especie { get; set; }
         public int? ResponsableId { get; set; }
         public string Provincia { get; set; }
         public string Ciudad { get; set; }

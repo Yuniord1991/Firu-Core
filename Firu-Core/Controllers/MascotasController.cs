@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Firu_Core.Models;
 using Firu.Services.Services;
 using Firu.Services.Interfaces;
+using Firu.Services.Parameters.Mascotas;
 
 namespace Firu_Core.Controllers
 {
@@ -28,14 +29,24 @@ namespace Firu_Core.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Mascota>>> GetMascota()
         {
-            //_context.Database.SetCommandTimeout(TimeSpan.FromMinutes(3));
+            _context.Database.SetCommandTimeout(TimeSpan.FromMinutes(3));
+
+            return await _context.Mascota.ToListAsync();
 
             //return await _context.Set<Mascota>().FromSqlRaw("select * from mascota").ToListAsync();
 
-            //return await _context.Mascota.ToListAsync();
-            var response = await _mascotaService.Get();
+            //var response = await _mascotaService.Get();   ESTE FUNCIONA, CON LA LINEA DE ABAJO
+            //return response;
+        }
 
-            return response;
+        // GET: api/Mascotas/GetAllMascotasForTable
+        [HttpGet]
+        [Route("GetAllMascotasForTable")]
+        public async Task<ActionResult> Get([FromQuery] GetAllMascotasForTableRequest request)
+        {
+            var response = await _mascotaService.Get(request);
+
+            return Ok(response.Mascotas);
         }
 
         // GET: api/Mascotas/5

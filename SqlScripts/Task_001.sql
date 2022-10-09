@@ -107,3 +107,8 @@ Values ('Inventory', 'Admin', 'InventoryAdmin', 'InventoryAdmin@abc.com', '$admi
 ALTER DATABASE [FiruProjectDB] MODIFY NAME = [FiruDB]
 
 select * from mascota
+
+/*--------------------------------------------------------------------------------------CAMPO ESPECIE*/
+ALTER TABLE Mascota ADD especie varchar(20)
+
+select * from mascota

@@ -15,6 +15,8 @@ using System.Threading.Tasks;
 using Microsoft.OpenApi.Models;
 using Firu.Services.Interfaces;
 using Firu.Services.Services;
+using AutoMapper;
+using System.Reflection;
 
 namespace Firu_Core
 {
@@ -37,6 +39,7 @@ namespace Firu_Core
             // Agregar Servicios junto con sus Interfaces
             services.AddScoped<IMascotaService, MascotaService>();
 
+            services.AddAutoMapper(Assembly.Load("Firu.Services"));
 
             // Register the Swagger generator, defining one or more Swagger documents
             AddSwagger(services);
