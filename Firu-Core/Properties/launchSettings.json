@@ -19,7 +19,7 @@
     //},
     "Firu_Core": {
         "commandName": "Project",
-        "launchBrowser": true,
+        "launchBrowser": false,
         "launchUrl": "swagger",
         "windowsAuthentication": false,
         "anonymousAuthentication": true,

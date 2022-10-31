@@ -46,7 +46,7 @@ namespace Firu_Core.Controllers
         {
             var response = await _mascotaService.Get(request);
 
-            return Ok(response.Mascotas);
+            return Ok(response);
         }
 
         // GET: api/Mascotas/5

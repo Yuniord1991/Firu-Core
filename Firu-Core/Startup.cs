@@ -22,6 +22,7 @@ namespace Firu_Core
 {
     public class Startup
     {
+        private readonly string _MyCors = "MyCors";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -36,16 +37,28 @@ namespace Firu_Core
             services.AddDbContextPool<FiruDBContext>(options => options.UseSqlServer(connection));
             services.AddControllers();
 
+            // Register CORS app
+            services.AddCors(options => {
+                options.AddPolicy(name: _MyCors, builder =>
+                {
+                    builder.SetIsOriginAllowed(_ => true);
+                    builder.AllowCredentials();
+                    builder.AllowAnyHeader();
+                    builder.AllowAnyMethod();
+                });
+            });
+
+
             // Agregar Servicios junto con sus Interfaces
             services.AddScoped<IMascotaService, MascotaService>();
+            services.AddScoped<ILoginService, LoginService>();
 
             services.AddAutoMapper(Assembly.Load("Firu.Services"));
 
             // Register the Swagger generator, defining one or more Swagger documents
             AddSwagger(services);
 
-            // Register CORS app
-            services.AddCors();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,6 +75,8 @@ namespace Firu_Core
 
             app.UseAuthorization();
 
+            app.UseCors(_MyCors);
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
@@ -73,7 +88,8 @@ namespace Firu_Core
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Foo API V1");
             });
 
-            AddCors(app);
+            //AddCors(app);
+
         }
 
         private void AddSwagger(IServiceCollection services)
@@ -97,15 +113,15 @@ namespace Firu_Core
             });
         }
 
-        private static void AddCors(IApplicationBuilder app)
-        {
-            app.UseCors(builder =>
-            {
-                builder.SetIsOriginAllowed(_ => true);
-                builder.AllowCredentials();
-                builder.AllowAnyHeader();
-                builder.AllowAnyMethod();
-            });
-        }
+        //private static void AddCors(IApplicationBuilder app)
+        //{
+        //    app.UseCors(builder =>
+        //    {
+        //        builder.SetIsOriginAllowed(_ => true);
+        //        builder.AllowCredentials();
+        //        builder.AllowAnyHeader();
+        //        builder.AllowAnyMethod();
+        //    });
+        //}
     }
 }
