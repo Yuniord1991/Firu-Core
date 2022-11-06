@@ -26,6 +26,7 @@ namespace Firu.Data.dbContext
         public virtual DbSet<TamanoMascota> TamanoMascota { get; set; }
         public virtual DbSet<UserInfo> UserInfo { get; set; }
         public virtual DbSet<Voluntario> Voluntario { get; set; }
+        public virtual DbSet<Movimiento> Movimiento { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -246,6 +247,19 @@ namespace Firu.Data.dbContext
                     .WithMany(p => p.Voluntario)
                     .HasForeignKey(d => d.OrganizacionId)
                     .HasConstraintName("fk_Organizacion");
+            });
+
+            modelBuilder.Entity<Movimiento>(entity =>
+            {
+                entity.Property(e => e.Id).HasColumnName("id");
+                entity.Property(e => e.Tipo).HasColumnName("tipo");
+                entity.Property(e => e.Remitente).HasColumnName("remitente");
+                entity.Property(e => e.Destino).HasColumnName("destino");
+                entity.Property(e => e.Motivo).HasColumnName("motivo");
+                entity.Property(e => e.Fecha).HasColumnName("fecha");
+                entity.Property(e => e.Monto).HasColumnName("monto");
+                entity.Property(e => e.DireccionRemitente).HasColumnName("direccion_remitente");
+                entity.Property(e => e.DireccionDestino).HasColumnName("direccion_destino");
             });
 
             OnModelCreatingPartial(modelBuilder);

@@ -54,6 +54,7 @@ namespace Firu_Core
             services.AddScoped<IMascotaService, MascotaService>();
             services.AddScoped<ILoginService, LoginService>();
             services.AddScoped<IVoluntarioService, VoluntarioService>();
+            services.AddScoped<IMovimientoService, MovimientoService>();
 
             services.AddAutoMapper(Assembly.Load("Firu.Services"));
 

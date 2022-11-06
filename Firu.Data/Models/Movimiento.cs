@@ -9,14 +9,14 @@ namespace Firu_Core.Models
 {
     public partial class Movimiento
     {
-        public int id { get; set; }
-        public string tipo { get; set; }
-        public string remitente { get; set; }
-        public string destino { get; set; }
-        public string motivo { get; set; }
-        public DateTime fecha { get; set; }
-        public double monto { get; set; }
-        public string direccion_remitente { get; set; }
-        public string direccion_destino { get; set; }
+        public int Id { get; set; }
+        public string Tipo { get; set; }
+        public string Remitente { get; set; }
+        public string Destino { get; set; }
+        public string Motivo { get; set; }
+        public DateTime Fecha { get; set; }
+        public decimal Monto { get; set; }
+        public string DireccionRemitente { get; set; }
+        public string DireccionDestino { get; set; }
     }
 }

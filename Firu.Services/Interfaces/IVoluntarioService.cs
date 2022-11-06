@@ -1,5 +1,4 @@
-﻿using Firu.Services.Parameters.Login;
-using Firu.Services.Parameters.Voluntarios;
+﻿using Firu.Services.Parameters.Voluntarios;
 using System.Threading.Tasks;
 
 namespace Firu.Services.Interfaces
