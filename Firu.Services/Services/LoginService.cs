@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using Firu_Core.Entities;
+using Firu.Data.dbContext;
 
 namespace Firu.Services.Services
 {

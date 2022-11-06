@@ -9,6 +9,7 @@ using Firu_Core.Models;
 using Firu.Services.Services;
 using Firu.Services.Interfaces;
 using Firu.Services.Parameters.Mascotas;
+using Firu.Data.dbContext;
 
 namespace Firu_Core.Controllers
 {

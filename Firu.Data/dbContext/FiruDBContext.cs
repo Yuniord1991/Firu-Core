@@ -1,4 +1,5 @@
 ﻿using System;
+using Firu_Core.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -6,8 +7,8 @@ using Microsoft.EntityFrameworkCore.Metadata;
 // If you have enabled NRTs for your project, then un-comment the following line:
 // #nullable disable
 
-namespace Firu_Core.Models
-{
+namespace Firu.Data.dbContext
+    {
     public partial class FiruDBContext : DbContext
     {
         //public FiruDBContext()
@@ -25,7 +26,6 @@ namespace Firu_Core.Models
         public virtual DbSet<TamanoMascota> TamanoMascota { get; set; }
         public virtual DbSet<UserInfo> UserInfo { get; set; }
         public virtual DbSet<Voluntario> Voluntario { get; set; }
-        public virtual DbSet<MeraPrueba> MeraPrueba { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

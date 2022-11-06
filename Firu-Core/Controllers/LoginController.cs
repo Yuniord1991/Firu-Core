@@ -9,6 +9,7 @@ using Firu_Core.Models;
 using Firu.Services.Services;
 using Firu.Services.Interfaces;
 using Firu.Services.Parameters.Login;
+using Firu.Data.dbContext;
 
 namespace Firu_Core.Controllers
 {
@@ -24,6 +25,7 @@ namespace Firu_Core.Controllers
             _context = context;
             _loginService = loginService;
         }
+
         [HttpGet]
         [Route("GetLogged")]
         public async Task<ActionResult> Get([FromQuery] GetLoggedRequest request)

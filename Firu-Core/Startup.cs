@@ -17,6 +17,7 @@ using Firu.Services.Interfaces;
 using Firu.Services.Services;
 using AutoMapper;
 using System.Reflection;
+using Firu.Data.dbContext;
 
 namespace Firu_Core
 {
@@ -52,6 +53,7 @@ namespace Firu_Core
             // Agregar Servicios junto con sus Interfaces
             services.AddScoped<IMascotaService, MascotaService>();
             services.AddScoped<ILoginService, LoginService>();
+            services.AddScoped<IVoluntarioService, VoluntarioService>();
 
             services.AddAutoMapper(Assembly.Load("Firu.Services"));
 

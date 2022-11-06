@@ -112,3 +112,29 @@ select * from mascota
 ALTER TABLE Mascota ADD especie varchar(20)
 
 select * from mascota
+
+/*--------------------------------------------------------------------------------------MOVIMIENTOS*/
+CREATE TABLE [Movimiento] (
+  id int IDENTITY(1,1) PRIMARY KEY NOT NULL,
+  tipo varchar(50) DEFAULT NULL,
+  remitente varchar(50) DEFAULT NULL,
+  destino varchar(50) DEFAULT NULL,
+  motivo varchar(100) DEFAULT NULL,
+  fecha date NULL,
+  monto decimal(19,2) NULL,
+  direccion_remitente varchar(100) DEFAULT NULL,
+  direccion_destino varchar(100) DEFAULT NULL
+);
+
+select * from MOVIMIENTO
+
+INSERT INTO Movimiento (tipo, remitente, destino, motivo, fecha, monto, direccion_remitente, direccion_destino)
+	VALUES
+		('INGRESO', 'REMITENTE1', 'REMITENTE2', 'FACTURACION', convert(datetime,'18-06-12 10:34:09 PM',5), 75.000,'Cordoba', 'Cordoba'),
+		('EGRESO', 'REMITENTE1', 'REMITENTE2', 'MANTENIMIENTO', convert(datetime,'18-06-12 10:34:09 PM',5), 12000.00,'Buenos Aires', 'Cordoba'),
+		('DONACION', 'REMITENTE2', 'REMITENTE3', 'DONACION', convert(datetime,'18-06-12 10:34:09 PM',5), 7000.00,'Cordoba', 'Cordoba'),
+		('INGRESO', 'REMITENTE3', 'REMITENTE4', 'FACTURACION', convert(datetime,'18-06-12 10:34:09 PM',5), 24000.00,'Cordoba', 'Cordoba')
+
+UPDATE Movimiento 
+SET monto = 75000.00 
+WHERE ID = 1
