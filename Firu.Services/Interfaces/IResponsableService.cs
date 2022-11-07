@@ -1,12 +1,12 @@
-﻿using Firu.Services.Parameters.Movimientos;
+﻿using Firu.Services.Parameters.Responsables;
 using System.Threading.Tasks;
 
 namespace Firu.Services.Interfaces
 {
-    public interface IMovimientoService
+    public interface IResponsableService
     {       
-        Task<GetAllMovimientosResponse> Get(GetAllMovimientosRequest request);
-        Task<PostMovimientoResponse> Post(PostMovimientoRequest request);
-        Task<GetAllMovimientosForTableResponse> Get(GetAllMovimientosForTableRequest request);
+        Task<GetAllResponsablesResponse> Get(GetAllResponsablesRequest request);
+        Task<PostResponsableResponse> Post(PostResponsableRequest request);
+        Task<GetAllResponsablesForTableResponse> Get(GetAllResponsablesForTableRequest request);
     }
 }

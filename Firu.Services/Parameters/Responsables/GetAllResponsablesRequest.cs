@@ -1,8 +1,8 @@
 using System;
 
-namespace Firu.Services.Parameters.Movimientos
+namespace Firu.Services.Parameters.Responsables
 {
-    public class GetAllMovimientosRequest
+    public class GetAllResponsablesRequest
     {
     }
 }

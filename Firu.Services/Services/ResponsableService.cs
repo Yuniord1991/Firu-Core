@@ -10,16 +10,16 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using Firu.Data.dbContext;
-using Firu.Services.Parameters.Movimientos;
+using Firu.Services.Parameters.Responsables;
 
 namespace Firu.Services.Services
 {
-    public class MovimientoService : IMovimientoService
+    public class ResponsableService : IResponsableService
     {
         private readonly FiruDBContext _context;
         protected readonly IMapper _mapper;
 
-        public MovimientoService(
+        public ResponsableService(
             FiruDBContext context,
             IMapper mapper
             )
@@ -28,84 +28,78 @@ namespace Firu.Services.Services
             _mapper = mapper;
         }
 
-        public async Task<GetAllMovimientosResponse> Get(GetAllMovimientosRequest request)
+        public async Task<GetAllResponsablesResponse> Get(GetAllResponsablesRequest request)
         {
-            var response = new GetAllMovimientosResponse();
+            var response = new GetAllResponsablesResponse();
 
-            var hold = await _context.Movimiento.FromSqlRaw("select * from Movimiento").ToListAsync();
+            var hold = await _context.Responsable.FromSqlRaw("select * from Responsable").ToListAsync();
 
-            response.Movimientos = hold;
+            response.Responsables = hold;
             response.Length = hold.Count;
 
             return response;
         }
 
-        public async Task<PostMovimientoResponse> Post(PostMovimientoRequest request)
+        public async Task<PostResponsableResponse> Post(PostResponsableRequest request)
         {
-            var response = new PostMovimientoResponse();
+            var response = new PostResponsableResponse();
 
-            var holdMovimiento = new Movimiento()
+            var holdResponsable = new Responsable()
             {
-                Tipo = request.Tipo,
-                Remitente = request.Remitente,
-                Destino = request.Destino,
-                Motivo = request.Motivo,
-                Fecha = request.Fecha,
-                Monto = request.Monto,
-                DireccionRemitente = request.DireccionRemitente,
-                DireccionDestino = request.DireccionDestino,
+                Nombre = request.Nombre,
+                Edad = request.Edad,
+                Puntuacion = request.Puntuacion,
+                Provincia = request.Provincia,
+                Ciudad = request.Ciudad,
+                Localidad = request.Localidad
             };
 
-            _context.Movimiento.Add(holdMovimiento);
+            _context.Responsable.Add(holdResponsable);
             await _context.SaveChangesAsync();
 
             return response;
         }
 
-        public async Task<GetAllMovimientosForTableResponse> Get(GetAllMovimientosForTableRequest request)
+        public async Task<GetAllResponsablesForTableResponse> Get(GetAllResponsablesForTableRequest request)
         {
-            var response = new GetAllMovimientosForTableResponse();
-            var predicate = PredicateBuilder.True<Movimiento>();
+            var response = new GetAllResponsablesForTableResponse();
+            var predicate = PredicateBuilder.True<Responsable>();
 
             var take = request.PageSize;
             var skip = request.PageNumber * request.PageSize;
             var direction = string.IsNullOrEmpty(request.SortDirection) ? "desc" : request.SortDirection;
-            var property = string.IsNullOrEmpty(request.SortProperty) ? nameof(Movimiento.Id) : request.SortProperty;
+            var property = string.IsNullOrEmpty(request.SortProperty) ? nameof(Responsable.Id) : request.SortProperty;
 
+            if ((request.Nombre) != null && (request.Nombre) != "")
+                predicate = predicate.And(c => c.Nombre.Contains(request.Nombre));
 
-            if ((request.Tipo) != null && (request.Tipo) != "")
-                predicate = predicate.And(c => c.Tipo.Contains(request.Tipo));
+            if ((request.Edad) != null && (request.Edad) != 0)
+                predicate = predicate.And(c => c.Edad.Equals(request.Edad));
 
-            if ((request.Remitente) != null && (request.Remitente) != "")
-                predicate = predicate.And(c => c.Remitente.Contains(request.Remitente));
+            if ((request.Puntuacion) != null && (request.Puntuacion) != "")
+                predicate = predicate.And(c => c.Puntuacion.Contains(request.Puntuacion));
 
-            if ((request.Destino) != null && (request.Destino) != "")
-                predicate = predicate.And(c => c.Destino.Contains(request.Destino));
+            if ((request.Provincia) != null && (request.Provincia) != "")
+                predicate = predicate.And(c => c.Provincia.Contains(request.Provincia));
 
-            if ((request.Motivo) != null && (request.Motivo) != "")
-                predicate = predicate.And(c => c.Motivo.Contains(request.Motivo));
+            if ((request.Ciudad) != null && (request.Ciudad) != "")
+                predicate = predicate.And(c => c.Ciudad.Contains(request.Ciudad));
 
-            if ((request.Monto) != null && (request.Monto) != 0)
-                predicate = predicate.And(c => c.Monto.Equals(request.Monto));
+            if ((request.Localidad) != null && (request.Localidad) != "")
+                predicate = predicate.And(c => c.Localidad.Contains(request.Localidad));
 
-            if ((request.DireccionRemitente) != null && (request.DireccionRemitente) != "")
-                predicate = predicate.And(c => c.DireccionRemitente.Contains(request.DireccionRemitente));
-
-            if ((request.DireccionDestino) != null && (request.DireccionDestino) != "")
-                predicate = predicate.And(c => c.DireccionDestino.Contains(request.DireccionDestino));
-
-            var mascotasList = await _context.Set<Movimiento>().PropertySorting(property, direction)
+            var responsableList = await _context.Set<Responsable>().PropertySorting(property, direction)
                 .Where(predicate)
                 .Skip((int)skip)
                 .Take((int)take)
                 .ToListAsync();
 
-            var mascotasLength = await _context.Set<Movimiento>()
+            var responsableLength = await _context.Set<Responsable>()
                 .Where(predicate)
                 .CountAsync();
 
-            response.Length = Convert.ToInt32(mascotasLength);
-            response.Movimientos = _mapper.Map<List<Movimiento>>(mascotasList);
+            response.Length = Convert.ToInt32(responsableLength);
+            response.Responsables = _mapper.Map<List<Responsable>>(responsableList);
 
             return response;
         }

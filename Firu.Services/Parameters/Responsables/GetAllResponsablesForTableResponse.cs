@@ -2,11 +2,11 @@ using Firu_Core.Models;
 using System;
 using System.Collections.Generic;
 
-namespace Firu.Services.Parameters.Movimientos
+namespace Firu.Services.Parameters.Responsables
 {
-    public class GetAllMovimientosForTableResponse
+    public class GetAllResponsablesForTableResponse
     {
-        public List<Movimiento> Movimientos { get; set; }
+        public List<Responsable> Responsables { get; set; }
         public int Length { get; set; }
     }
 }

@@ -138,6 +138,8 @@ namespace Firu.Data.dbContext
 
                 entity.Property(e => e.Edad).HasColumnName("edad");
 
+                entity.Property(e => e.Puntuacion).HasColumnName("puntuacion"); // ALTA -- BAJA -- MEDIA
+
                 entity.Property(e => e.Localidad)
                     .HasColumnName("localidad")
                     .HasMaxLength(50)
