@@ -37,5 +37,14 @@ namespace Firu_Core.Controllers
             var response = await _movimientoService.Post(request);
             return Ok(response);
         }
+
+        [HttpGet]
+        [Route("GetAllMovimientosForTable")]
+        public async Task<ActionResult> Get([FromQuery] GetAllMovimientosForTableRequest request)
+        {
+            var response = await _movimientoService.Get(request);
+
+            return Ok(response);
+        }
     }
 }

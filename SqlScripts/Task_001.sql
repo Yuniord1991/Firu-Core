@@ -29,6 +29,9 @@ values
   ('example3', 30, 'example3', 'example3', 'example3'),
   ('example4', 40, 'example4', 'example4', 'example4');
 
+  --agregado por criterio de malos adoptantes --- niveles (ALTA - MEDIANA - BAJA))
+  ALTER TABLE Responsable ADD puntuacion varchar(20)
+
 /*--------------------------------------------------------------------------------------MASCOTA*/
 CREATE TABLE [Mascota] (
   id int IDENTITY(1,1) PRIMARY KEY NOT NULL,

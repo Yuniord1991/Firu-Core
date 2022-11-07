@@ -34,9 +34,9 @@ namespace Firu.Services.Services
             return resp;
         }
 
-        public async Task<GetAllMascotasForTableResponse> Get(GetAllMascotasForTableRequest request)
+        public async Task<GetAllMovimientosForTableResponse> Get(GetAllMascotasForTableRequest request)
         {
-            var response = new GetAllMascotasForTableResponse();
+            var response = new GetAllMovimientosForTableResponse();
             var predicate = PredicateBuilder.True<Mascota>();
 
             var take = request.PageSize;

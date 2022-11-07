@@ -10,6 +10,6 @@ namespace Firu.Services.Interfaces
     public interface IMascotaService
     {
         Task<List<Mascota>> Get();
-        Task<GetAllMascotasForTableResponse> Get(GetAllMascotasForTableRequest request);
+        Task<GetAllMovimientosForTableResponse> Get(GetAllMascotasForTableRequest request);
     }
 }
