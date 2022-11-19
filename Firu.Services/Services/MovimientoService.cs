@@ -94,18 +94,75 @@ namespace Firu.Services.Services
             if ((request.DireccionDestino) != null && (request.DireccionDestino) != "")
                 predicate = predicate.And(c => c.DireccionDestino.Contains(request.DireccionDestino));
 
-            var mascotasList = await _context.Set<Movimiento>().PropertySorting(property, direction)
+            var movimientosList = await _context.Set<Movimiento>().PropertySorting(property, direction)
                 .Where(predicate)
                 .Skip((int)skip)
                 .Take((int)take)
                 .ToListAsync();
 
-            var mascotasLength = await _context.Set<Movimiento>()
+            var movimientosLength = await _context.Set<Movimiento>()
                 .Where(predicate)
                 .CountAsync();
 
-            response.Length = Convert.ToInt32(mascotasLength);
-            response.Movimientos = _mapper.Map<List<Movimiento>>(mascotasList);
+            response.Length = Convert.ToInt32(movimientosLength);
+            response.Movimientos = _mapper.Map<List<Movimiento>>(movimientosList);
+
+            return response;
+        }
+
+        public async Task<GetMovimientosForDashboardResponse> Get(GetMovimientosForDashboardRequest request)
+        {
+            var response = new GetMovimientosForDashboardResponse();
+
+            //INGRESOS
+            var predicateIngreso = PredicateBuilder.True<Movimiento>();
+            predicateIngreso = predicateIngreso.And(c => c.Tipo.Contains("INGRESO"));
+
+            var listIngresos = await _context.Set<Movimiento>()
+                                .Where(predicateIngreso)
+                                .ToListAsync();
+            var totalIncome = 0;
+
+            foreach (var income in listIngresos)
+            {
+                totalIncome = (int)(totalIncome + income.Monto);
+            }
+
+            response.Ingresos = totalIncome;
+
+            //EGRESOS
+            var predicateEgreso = PredicateBuilder.True<Movimiento>();
+            predicateEgreso = predicateEgreso.And(c => c.Tipo.Contains("EGRESO"));
+
+            var listEgresos =  await _context.Set<Movimiento>()
+                                .Where(predicateEgreso)
+                                .ToListAsync();
+
+            var totalOutcome = 0;
+
+            foreach (var outcome in listEgresos)
+            {
+                totalOutcome = (int)(totalOutcome + outcome.Monto);
+            }
+
+            response.Egresos = totalOutcome;
+
+            //DONACIONES
+            var predicateDonacion = PredicateBuilder.True<Movimiento>();
+            predicateDonacion = predicateDonacion.And(c => c.Tipo.Contains("DONACION"));
+
+            var listDonations = await _context.Set<Movimiento>()
+                                .Where(predicateDonacion)
+                                .ToListAsync();
+
+            var totalDonations = 0;
+
+            foreach (var donation in listDonations)
+            {
+                totalDonations = (int)(totalDonations + donation.Monto);
+            }
+
+            response.Donaciones = totalDonations;
 
             return response;
         }

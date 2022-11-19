@@ -34,9 +34,36 @@ namespace Firu.Services.Services
             return resp;
         }
 
-        public async Task<GetAllMovimientosForTableResponse> Get(GetAllMascotasForTableRequest request)
+        public async Task<GetMascotasForDashboardResponse> Get(GetMascotasForDashboardRequest request)
         {
-            var response = new GetAllMovimientosForTableResponse();
+            var response = new GetMascotasForDashboardResponse();
+
+            //PERROS
+            var predicateDog = PredicateBuilder.True<Mascota>();
+            predicateDog = predicateDog.And(c => c.Especie.Contains("DOG"));
+
+            response.Perros = await _context.Set<Mascota>()
+                                .Where(predicateDog)
+                                .CountAsync();
+
+            //GATOS
+            var predicateCat = PredicateBuilder.True<Mascota>();
+            predicateCat = predicateCat.And(c => c.Especie.Contains("CAT"));
+
+            response.Gatos = await _context.Set<Mascota>()
+                                .Where(predicateCat)
+                                .CountAsync();
+
+            //TOTAL
+            response.Total = await _context.Set<Mascota>()
+                                .CountAsync();
+
+            return response;
+        }
+
+        public async Task<GetAllMascotasForTableResponse> Get(GetAllMascotasForTableRequest request)
+        {
+            var response = new GetAllMascotasForTableResponse();
             var predicate = PredicateBuilder.True<Mascota>();
 
             var take = request.PageSize;

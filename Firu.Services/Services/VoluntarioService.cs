@@ -40,6 +40,17 @@ namespace Firu.Services.Services
             return response;
         }
 
+        public async Task<GetVoluntariosForDashboardResponse> Get(GetVoluntariosForDashboardRequest request)
+        {
+            var response = new GetVoluntariosForDashboardResponse();
+
+            var hold = await _context.Voluntario.FromSqlRaw( "select * from Voluntario ORDER BY Id OFFSET 0 ROWS FETCH NEXT 6 ROWS ONLY;" ).ToListAsync();
+
+            response.Voluntarios = hold;
+
+            return response;
+        }
+
         public async Task<PostVoluntarioResponse> Post(PostVoluntarioRequest request)
         {
             var response = new PostVoluntarioResponse();

@@ -8,5 +8,6 @@ namespace Firu.Services.Interfaces
         Task<GetAllMovimientosResponse> Get(GetAllMovimientosRequest request);
         Task<PostMovimientoResponse> Post(PostMovimientoRequest request);
         Task<GetAllMovimientosForTableResponse> Get(GetAllMovimientosForTableRequest request);
+        Task<GetMovimientosForDashboardResponse> Get(GetMovimientosForDashboardRequest request);
     }
 }

@@ -27,6 +27,7 @@ namespace Firu.Data.dbContext
         public virtual DbSet<UserInfo> UserInfo { get; set; }
         public virtual DbSet<Voluntario> Voluntario { get; set; }
         public virtual DbSet<Movimiento> Movimiento { get; set; }
+        public virtual DbSet<Adoptante> Adoptantes { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -262,6 +263,20 @@ namespace Firu.Data.dbContext
                 entity.Property(e => e.Monto).HasColumnName("monto");
                 entity.Property(e => e.DireccionRemitente).HasColumnName("direccion_remitente");
                 entity.Property(e => e.DireccionDestino).HasColumnName("direccion_destino");
+            });
+
+            modelBuilder.Entity<Adoptante>(entity =>
+            {
+                entity.Property(e => e.Id).HasColumnName("id");
+                entity.Property(e => e.Dni).HasColumnName("dni");
+                entity.Property(e => e.Nombre).HasColumnName("nombre");
+                entity.Property(e => e.Apellido).HasColumnName("apellido");
+                entity.Property(e => e.Edad).HasColumnName("edad");
+                entity.Property(e => e.Ciudad).HasColumnName("ciudad");
+                entity.Property(e => e.Localidad).HasColumnName("localidad");
+                entity.Property(e => e.Provincia).HasColumnName("provincia");
+                entity.Property(e => e.Calificacion).HasColumnName("calificacion");
+                entity.Property(e => e.EnEspera).HasColumnName("en_espera");
             });
 
             OnModelCreatingPartial(modelBuilder);

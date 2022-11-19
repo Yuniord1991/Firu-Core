@@ -50,6 +50,15 @@ namespace Firu_Core.Controllers
             return Ok(response);
         }
 
+        [HttpGet]
+        [Route("GetMascotasForDashboard")]
+        public async Task<ActionResult> Get([FromQuery] GetMascotasForDashboardRequest request)
+        {
+            var response = await _mascotaService.Get(request);
+
+            return Ok(response);
+        }
+
         // GET: api/Mascotas/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Mascota>> GetMascota(int id)

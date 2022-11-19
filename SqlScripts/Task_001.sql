@@ -87,6 +87,8 @@ CREATE TABLE [Voluntario] (
 
 INSERT INTO Voluntario (dni, nombre, apellido, edad, organizacion_id, provincia, ciudad, localidad)
 	VALUES
+		(99999111, 'Voluntario7', 'Voluntario7', 47, 1, 'Cordoba', 'Cordoba', 'Capital'),
+		(99999111, 'Voluntario6', 'Voluntario6', 21, 1, 'Cordoba', 'Cordoba', 'Capital'),
 		(99999111, 'Voluntario1', 'Voluntario1', 21, 1, 'Cordoba', 'Cordoba', 'Capital'),
 		(99999111, 'Voluntario2', 'Voluntario2', 22, 2, 'Cordoba', 'Cordoba', 'Capital'),
 		(99999111, 'Voluntario3', 'Voluntario3', 23, 3, 'Cordoba', 'Cordoba', 'Capital'),
@@ -141,3 +143,32 @@ INSERT INTO Movimiento (tipo, remitente, destino, motivo, fecha, monto, direccio
 UPDATE Movimiento 
 SET monto = 75000.00 
 WHERE ID = 1
+
+/*--------------------------------------------------------------------------------------ADOPTANTES*/
+CREATE TABLE [Adoptantes] (
+  id int IDENTITY(1,1) PRIMARY KEY NOT NULL,
+  dni int NULL,
+  nombre varchar(50) DEFAULT NULL,
+  apellido varchar(50) DEFAULT NULL,
+  edad int NULL,
+  provincia varchar(50) DEFAULT NULL,
+  ciudad varchar(50) DEFAULT NULL,
+  localidad varchar(50) DEFAULT NULL,
+  calificacion varchar(50) DEFAULT NULL,
+  en_espera varchar(50) DEFAULT NULL
+);
+
+INSERT INTO Adoptantes (dni, nombre, apellido, edad, provincia, ciudad, localidad, calificacion, en_espera)
+	VALUES
+		(99999111, 'Adoptante1', 'Adoptante1', 47, 'Cordoba', 'Cordoba', 'Capital', NULL, ''),
+		(99999111, 'Adoptante2', 'Adoptante2', 21, 'Cordoba', 'Cordoba', 'Capital', 'BAD', ''),
+		(99999111, 'Adoptante3', 'Adoptante3', 21, 'Cordoba', 'Cordoba', 'Capital', NULL, ''),
+		(99999111, 'Adoptante4', 'Adoptante4', 22, 'Cordoba', 'Cordoba', 'Capital', 'BAD', ''),
+		(99999111, 'Adoptante5', 'Adoptante5', 23, 'Cordoba', 'Cordoba', 'Capital', NULL, ''),
+		(99999111, 'Adoptante6', 'Adoptante6', 24, 'Cordoba', 'Cordoba', 'Capital', 'BAD', ''),
+		(99999111, 'Adoptante7', 'Adoptante7', 29, 'Cordoba', 'Cordoba', 'Capital', 'BAD', ''),
+		(99999111, 'Adoptante8', 'Adoptante8', 32, 'Cordoba', 'Cordoba', 'Capital', 'BAD', '');
+
+UPDATE Adoptantes 
+SET calificacion = 'GOOD' 
+WHERE calificacion = null

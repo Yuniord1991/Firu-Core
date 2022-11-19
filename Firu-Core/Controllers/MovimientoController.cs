@@ -46,5 +46,14 @@ namespace Firu_Core.Controllers
 
             return Ok(response);
         }
+
+        [HttpGet]
+        [Route("GetMovimientosForDashboard")]
+        public async Task<ActionResult> Get([FromQuery] GetMovimientosForDashboardRequest request)
+        {
+            var response = await _movimientoService.Get(request);
+
+            return Ok(response);
+        }
     }
 }
