@@ -50,8 +50,8 @@ namespace Firu.Services.Services
                 Remitente = request.Remitente,
                 Destino = request.Destino,
                 Motivo = request.Motivo,
-                Fecha = request.Fecha,
-                Monto = request.Monto,
+                Fecha = Convert.ToDateTime(request.Fecha),
+                Monto = Convert.ToDecimal(request.Monto),
                 DireccionRemitente = request.DireccionRemitente,
                 DireccionDestino = request.DireccionDestino,
             };
@@ -87,6 +87,9 @@ namespace Firu.Services.Services
 
             if ((request.Monto) != null && (request.Monto) != 0)
                 predicate = predicate.And(c => c.Monto.Equals(request.Monto));
+
+            if (request.Fecha.HasValue)
+                predicate = predicate.And(c => c.Fecha > request.Fecha.Value);
 
             if ((request.DireccionRemitente) != null && (request.DireccionRemitente) != "")
                 predicate = predicate.And(c => c.DireccionRemitente.Contains(request.DireccionRemitente));

@@ -160,6 +160,8 @@ CREATE TABLE [Adoptantes] (
 
 INSERT INTO Adoptantes (dni, nombre, apellido, edad, provincia, ciudad, localidad, calificacion, en_espera)
 	VALUES
+		(99999112, 'Adoptante9', 'Adoptante9', 49, 'Cordoba', 'Cordoba', 'Capital', 'GOOD', 'SI'),
+		(99999113, 'Adoptante10', 'Adoptante10', 50, 'Cordoba', 'Cordoba', 'Capital', 'GOOD', 'SI'),
 		(99999111, 'Adoptante1', 'Adoptante1', 47, 'Cordoba', 'Cordoba', 'Capital', NULL, ''),
 		(99999111, 'Adoptante2', 'Adoptante2', 21, 'Cordoba', 'Cordoba', 'Capital', 'BAD', ''),
 		(99999111, 'Adoptante3', 'Adoptante3', 21, 'Cordoba', 'Cordoba', 'Capital', NULL, ''),

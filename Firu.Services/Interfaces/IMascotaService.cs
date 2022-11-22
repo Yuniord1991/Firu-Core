@@ -12,5 +12,6 @@ namespace Firu.Services.Interfaces
         Task<List<Mascota>> Get();
         Task<GetAllMascotasForTableResponse> Get(GetAllMascotasForTableRequest request);
         Task<GetMascotasForDashboardResponse> Get(GetMascotasForDashboardRequest request);
+        Task<PostMascotaResponse> Post(PostMascotaRequest request);
     }
 }

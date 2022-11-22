@@ -108,13 +108,21 @@ namespace Firu_Core.Controllers
         // POST: api/Mascotas
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPost]
-        public async Task<ActionResult<Mascota>> PostMascota(Mascota mascota)
-        {
-            _context.Mascota.Add(mascota);
-            await _context.SaveChangesAsync();
+        //[HttpPost]
+        //public async Task<ActionResult<Mascota>> PostMascota(Mascota mascota)
+        //{
+        //    _context.Mascota.Add(mascota);
+        //    await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetMascota", new { id = mascota.Id }, mascota);
+        //    return CreatedAtAction("GetMascota", new { id = mascota.Id }, mascota);
+        //}
+
+        [HttpPost]
+        [Route("PostMascota")]
+        public async Task<IActionResult> Post([FromBody] PostMascotaRequest request)
+        {
+            var response = await _mascotaService.Post(request);
+            return Ok(response);
         }
 
         // DELETE: api/Mascotas/5

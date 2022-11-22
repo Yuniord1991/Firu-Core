@@ -113,6 +113,38 @@ namespace Firu.Services.Services
             return response;
         }
 
+        public async Task<PostMascotaResponse> Post(PostMascotaRequest request)
+        {
+            var response = new PostMascotaResponse();
 
+            var holdMascota = new Mascota()
+            {
+                Nombre = request.Nombre,
+                Raza = request.Raza,
+                Edad = Convert.ToInt32(request.Edad),
+                Peso = Convert.ToInt32(request.Peso),
+                Castrado = Convert.ToBoolean(request.Castrado),
+                Tamano = Convert.ToInt32(request.Tamano),
+                Especie = request.Especie,
+                ResponsableId = Convert.ToInt32(request.ResponsableId),
+                Provincia = request.Provincia,
+                Ciudad = request.Ciudad,
+                Localidad = request.Localidad
+            };
+
+            var exist = await _context
+                .Mascota
+                .FromSqlRaw( "select * from Mascota where nombre = {0} and raza = {1} and edad = {2} and tamano = {3} and ciudad = {4}",
+                holdMascota.Nombre, holdMascota.Raza, holdMascota.Edad, holdMascota.Tamano, holdMascota.Ciudad )
+                .ToListAsync();
+
+            if (exist.Count == 0 || exist.Count == null)
+            {
+                _context.Mascota.Add(holdMascota);
+                await _context.SaveChangesAsync();
+            }
+
+            return response;
+        }
     }
 }

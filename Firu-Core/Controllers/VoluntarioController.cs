@@ -38,6 +38,15 @@ namespace Firu_Core.Controllers
             return Ok(response);
         }
 
+        [HttpGet]
+        [Route("GetAllVoluntariosForTable")]
+        public async Task<ActionResult> Get([FromQuery] GetAllVoluntariosForTableRequest request)
+        {
+            var response = await _voluntarioService.Get(request);
+
+            return Ok(response);
+        }
+
         // LE COLOQUE COMO GET PORQUE SI LE DEJO EL POST, LOS VALORES DEL REQUEST NO PASAN Y QUEDAN EN "NULL"
         [HttpPost]
         [Route("PostVoluntario")]

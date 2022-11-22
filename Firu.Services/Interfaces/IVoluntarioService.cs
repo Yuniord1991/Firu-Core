@@ -7,6 +7,7 @@ namespace Firu.Services.Interfaces
     {       
         Task<GetAllVoluntariosResponse> Get(GetAllVoluntariosRequest request);
         Task<GetVoluntariosForDashboardResponse> Get(GetVoluntariosForDashboardRequest request);
+        Task<GetAllVoluntariosForTableResponse> Get(GetAllVoluntariosForTableRequest request);
         Task<PostVoluntarioResponse> Post(PostVoluntarioRequest request);
     }
 }

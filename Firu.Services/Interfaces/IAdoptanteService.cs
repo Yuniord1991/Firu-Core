@@ -7,6 +7,7 @@ namespace Firu.Services.Interfaces
     {       
         Task<GetAllAdoptantesResponse> Get(GetAllAdoptantesRequest request);
         Task<GetAdoptantesForDashboardResponse> Get(GetAdoptantesForDashboardRequest request);
+        Task<GetAllAdoptantesForTableResponse> Get(GetAllAdoptantesForTableRequest request);
         Task<PostAdoptanteResponse> Post(PostAdoptanteRequest request);
     }
 }
