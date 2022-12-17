@@ -4,8 +4,8 @@ using System.Collections.Generic;
 
 namespace Firu.Services.Parameters.Adoptantes
 {
-    public class GetAdoptantesForDashboardResponse
+    public class GetAdoptantesEsperaForDashboardResponse
     {
-        public List<Adoptante> ListaMalosAdoptantes { get; set; }
+        public List<AdoptanteEspera> ListaEsperaAdoptantes { get; set; }
     }
 }

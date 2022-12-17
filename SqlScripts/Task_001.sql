@@ -51,6 +51,7 @@ CREATE TABLE [Mascota] (
 
 INSERT INTO Mascota (nombre, raza, edad, peso, castrado, tamano, responsable_id, provincia, ciudad, localidad)
 	VALUES
+		('example23', 'example23', 2, 20, 0, 1, 2, 'example23', 'example23', 'example23'),
 		('Max', 'Border Collie', 3, 25, 1, 3, 3, 'Cordoba', 'Cordoba', 'Capital'),
 		('example2', 'example2', 2, 20, 0, 1, 2, 'example2', 'example2', 'example2');
 
@@ -174,3 +175,17 @@ INSERT INTO Adoptantes (dni, nombre, apellido, edad, provincia, ciudad, localida
 UPDATE Adoptantes 
 SET calificacion = 'GOOD' 
 WHERE calificacion = null
+
+/*----------------------------------------------------------------------------------ADOPTANTES EN ESPERA*/
+
+CREATE TABLE [Adoptantes_en_espera] (
+  id int IDENTITY(1,1) PRIMARY KEY NOT NULL,
+  nombre varchar(50) DEFAULT NULL,
+  telefono int NULL,
+  ciudad varchar(50) DEFAULT NULL,
+  especie varchar(50) DEFAULT NULL,
+  raza varchar(50) DEFAULT NULL,
+  tamaño varchar(50) DEFAULT NULL,
+  color varchar(50) DEFAULT NULL,
+  edad int NULL
+);

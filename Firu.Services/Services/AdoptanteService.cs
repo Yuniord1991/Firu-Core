@@ -44,23 +44,14 @@ namespace Firu.Services.Services
         public async Task<GetAdoptantesForDashboardResponse> Get(GetAdoptantesForDashboardRequest request)
         {
             var response = new GetAdoptantesForDashboardResponse();
-            var espListPredicate = PredicateBuilder.True<Adoptante>();
             var badListPredicate = PredicateBuilder.True<Adoptante>();
-
-            //var hold = await _context.Adoptante.FromSqlRaw( "select * from Adoptantes where en_espera = 'YES' ORDER BY Id OFFSET 0 ROWS FETCH NEXT 5 ROWS ONLY;" ).ToListAsync();
-
-            espListPredicate = espListPredicate.And(c => c.EnEspera.Contains("YES"));
-
-            var listaEspera = await _context.Adoptantes
-                                .Where(espListPredicate)
-                                .ToListAsync();
-
-            response.ListaEsperaAdoptantes = listaEspera;
 
             badListPredicate = badListPredicate.And(c => c.Calificacion.Contains("BAD"));
 
+            var take = 5;
             var listaMalosAdopt = await _context.Set<Adoptante>()
                                 .Where(badListPredicate)
+                                .Take((int)take)
                                 .ToListAsync();
 
             response.ListaMalosAdoptantes = listaMalosAdopt;
