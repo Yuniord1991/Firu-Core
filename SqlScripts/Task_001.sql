@@ -189,3 +189,11 @@ CREATE TABLE [Adoptantes_en_espera] (
   color varchar(50) DEFAULT NULL,
   edad int NULL
 );
+
+exec sp_rename 'Adoptantes_en_espera', AdoptanteEspera;
+exec sp_rename 'AdoptanteEspera', AdoptantesEspera;
+
+INSERT INTO AdoptantesEspera ( nombre, telefono, ciudad, especie, raza, tamaño, color, edad)
+	VALUES
+		('adoptanteEnEspera2', 1159819446, 'caracas', 'Perro', 'Jack', 'Pequeño', 'blanco', 3),
+		('adoptanteEnEspera', 1159819448, 'caracas', 'Perro', 'Border', 'Grande', 'Negro', 8);
